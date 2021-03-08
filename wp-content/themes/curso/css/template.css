@@ -1,0 +1,37 @@
+.social-media-icons{
+	background: green;
+	height: 30px;
+}
+
+.search{
+	background: yellow;
+	height: 30px;
+}
+
+.main-menu ul li{
+	display: inline;
+
+}
+
+.main-menu a{
+	text-decoration: none;
+}
+
+.footer-menu ul li{
+	display: inline;
+
+}
+
+.footer-menu a{
+	text-decoration: none;
+	
+}
+
+.wp-post-image {
+	float: left;
+	margin: 0px 15px 10px 0px;
+}
+
+.blog article{
+	display: inline-block;
+}
