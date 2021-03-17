@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html <?php language_attributes(); ?>>
 <head>
-	<meta charset="UTF-8">
+	<meta charset="<?php bloginfo('charset'); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Curso WordPress</title>
+	
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
@@ -14,7 +14,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="social-media-icons  col-6">Icones Sociais</div>
-					<div class="search col-6  d-flex justify-content-end">Pesquisa</div>
+					<div class="search col-6  d-flex justify-content-end"><?php get_search_form() ?></div>
 				</div>
 			</div>
 			
@@ -25,7 +25,7 @@
 				<div class="row">
 					<section class="logo text-center col-6 ">Logo</section>
 					
-					<nav class="navbar navbar-expand-md navbar-light bg-info col-6" role="navigation">
+					<nav class="navbar navbar-expand-md navbar-light col-6" role="navigation">
 						<div class="container">
 							<!-- Brand and toggle get grouped for better mobile display -->
 							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation">
