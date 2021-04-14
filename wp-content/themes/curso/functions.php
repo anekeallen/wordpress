@@ -1,5 +1,9 @@
 <?php  
 
+//Requerendo o arquivo customizer
+
+require get_template_directory() . '/inc/customizer.php';
+
 /**
  * Register Custom Navigation Walker
  */
@@ -26,9 +30,9 @@ function wpcurso_config(){
 	
 	//Registrar o menu
 	register_nav_menus( array(
-		'primary' => __( 'Primary Menu', 'THEMENAME' ),
-		'my_main_menu' => 'Main Menu',
-		'my_footer_menu' => 'Footer Menu'
+		'primary' => __( 'Primary Menu', 'wpcurso' ),
+		'my_main_menu' => __('Main Menu', 'wpcurso'),
+		'my_footer_menu' => __('Footer Menu', 'wpcurso')
 	) );
 
 	//Argumentos de tamanho de imagens
@@ -41,9 +45,16 @@ function wpcurso_config(){
 	add_theme_support('post-thumbnails'); //Suporte para add miniaturas a posts
 	add_theme_support( 'post-formats', array( 'aside', 'gallery','video','image' ) ); //Adiciona formatos de post ao tema.
 	add_theme_support('title-tag');
+	add_theme_support('custom-logo', array('height' => 110, 'width' => 200));
 
 	 add_image_size( 'imagem-pequena', 100, 100, TRUE ); //Add tamanho de miniaturas de imagem para usar differentes tamanhos de imagem no tema
 	 add_image_size( 'imagem-media', 250, 250, TRUE );
+
+	 //Habilitar suporte à tradução
+
+	 $textdomain = 'wpcurso';
+
+	 load_theme_textdomain( $textdomain, get_template_directory() . '/languages' );
 
 
 
@@ -51,6 +62,7 @@ function wpcurso_config(){
 }
 add_action('after_setup_theme','wpcurso_config', 0 );
 
+//registrando sidebars
 add_action( 'widgets_init', 'wpcurso_sidebars' );
 
 function wpcurso_sidebars(){
@@ -59,9 +71,9 @@ function wpcurso_sidebars(){
 	 * @param string|array  Builds Sidebar based off of 'name' and 'id' values.
 	 */
 	$args = array(
-		'name'          => __( 'Home Sidebar', 'text-domain' ),
+		'name'          => __( 'Home Sidebar', 'wpcurso' ),
 		'id'            => 'sidebar-1',
-		'description'   => 'Sidebar to be used on Home Page',
+		'description'   => __('Sidebar to be used on Home Page', 'wpcurso'),
 		'class'         => '',
 		'before_widget' => '<div class="widget-wrapper">',
 		'after_widget'  => '</div>',
@@ -70,9 +82,9 @@ function wpcurso_sidebars(){
 	);
 
 	$args2 = array(
-		'name'          => __( 'Blog Sidebar', 'text-domain' ),
+		'name'          => __( 'Blog Sidebar', 'wpcurso' ),
 		'id'            => 'sidebar-2',
-		'description'   => 'Sidebar to be used on Blog Page',
+		'description'   => __('Sidebar to be used on Blog Page', 'wpcurso' ),
 		'class'         => '',
 		'before_widget' => '<div class="widget-wrapper">',
 		'after_widget'  => '</div>',
@@ -81,9 +93,9 @@ function wpcurso_sidebars(){
 	);
 
 	$args3 = array(
-		'name'          => __( 'Services 1', 'text-domain' ),
+		'name'          => __( 'Services 1', 'wpcurso' ),
 		'id'            => 'services-1',
-		'description'   => 'First Service Area',
+		'description'   => __('First Service Area', 'wpcurso'),
 		'class'         => '',
 		'before_widget' => '<div class="widget-wrapper">',
 		'after_widget'  => '</div>',
@@ -92,9 +104,9 @@ function wpcurso_sidebars(){
 	);
 
 	$args4 = array(
-		'name'          => __( 'Services 2', 'text-domain' ),
+		'name'          => __( 'Services 2', 'wpcurso' ),
 		'id'            => 'services-2',
-		'description'   => 'Second Service Area',
+		'description'   => __('Second Service Area', 'wpcurso'),
 		'class'         => '',
 		'before_widget' => '<div class="widget-wrapper">',
 		'after_widget'  => '</div>',
@@ -103,9 +115,20 @@ function wpcurso_sidebars(){
 	);
 
 	$args5 = array(
-		'name'          => __( 'Services 3', 'text-domain' ),
+		'name'          => __( 'Services 3', 'wpcurso' ),
 		'id'            => 'services-3',
-		'description'   => 'Third Service Area',
+		'description'   => __('Third Service Area', 'wpcurso'),
+		'class'         => '',
+		'before_widget' => '<div class="widget-wrapper">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
+	);
+
+	$args6 = array(
+		'name'          => __( 'Social Icons', 'wpcurso' ),
+		'id'            => 'social-media',
+		'description'   => __('Place your media icons here', 'wpcurso'),
 		'class'         => '',
 		'before_widget' => '<div class="widget-wrapper">',
 		'after_widget'  => '</div>',
@@ -120,6 +143,7 @@ function wpcurso_sidebars(){
 	register_sidebar( $args3 );
 	register_sidebar( $args4 );
 	register_sidebar( $args5 );
+	register_sidebar( $args6 );
 	
 }
 

@@ -2,9 +2,12 @@
 <div class="content-area">
 	<main>
 		<section class="slide">
-			<div class="container">
-				<div class="row">Slide</div>
-			</div>
+			
+			<?php 
+
+			$design = get_theme_mod('set_slider_option');
+			$limit = get_theme_mod('set_slider_limit');
+			echo do_shortcode('[recent_post_slider design="design-' .$design. '" limit="'.$limit.'"]') ?>			
 		</section>
 		<section class="services">
 			<div class="container">
@@ -50,7 +53,7 @@
 							<div class="row">
 								<?php 
 
-
+								$loop1cats = get_theme_mod( 'set_loop1_categories' );
 								$args1 = array(
 
 
@@ -65,7 +68,7 @@
 									
 									
 											// Pagination Parameters
-									'posts_per_page'         => 1,
+									'posts_per_page' => 1,
 									
 									
 									
@@ -73,7 +76,10 @@
 									
 								);
 
-								$featured = new WP_Query( $args1 );
+
+
+
+								$featured = new WP_Query( 'post_type=post&posts_per_page=1&cat=' . $loop1cats  );
 
 
 								if ($featured->have_posts()) {
@@ -93,15 +99,20 @@
 										# code...
 								}
 
+								$per_page = get_theme_mod( 'set_loop2_posts_per_page' );
+						// Colaboração do aluno Deividi de Azevedo
+						$loop2_cat_exclude = explode( ',', get_theme_mod( 'set_loop2_categories_to_exclude' ));
+						$loop2_cat_include = explode( ',', get_theme_mod( 'set_loop2_categories_to_include' ));
+
 
 
 									//Segundo loop
 
 								$args = array(
 									'post_type' => 'post',
-									'post_per_page' => 2,
-									'category__not_in' => array( 6 ),
-									'category__in' => array( 7, 8 ),
+									'post_per_page' => $per_page,
+									'category__not_in' => $loop2_cat_exclude,
+									'category__in' => $loop2_cat_include,
 									'offset' => 1
 
 
@@ -138,10 +149,21 @@
 			</div>				
 		</section>
 		<section class="map">
-			<div class="container">
-				<div class="row">Mapa</div>
-			</div>				
-		</section>
-	</main>
+
+			<?php 
+			$key = get_theme_mod('set_map_apikey');
+			$address = urlencode(get_theme_mod('set_map_address'));
+			?>
+			<iframe
+			width="100%"
+			height="350"
+			style="border:0"
+			loading="lazy"
+			allowfullscreen
+			src="https://www.google.com/maps/embed/v1/place?key=<?php echo $key ?>
+			&q=<?php echo $address ?>&zoom=15">
+		</iframe>			
+	</section>
+</main>
 </div>
 <?php get_footer(); ?>
